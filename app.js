@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < width*width; i++) {
       const square = document.createElement('div')
       square.dataset.id = i
+      square.classList.add('points')
       grid.appendChild(square)
       squares.push(square)
     }
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function generateUser() {
+    resetBoard()
     for(var i = 0 ; i<5 ; i++){
       generate(shipArray[i],userSquares)
     }
@@ -212,9 +214,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   multiButton.addEventListener('click', multiPlayer)
 
+  //Reset User ships
+
+  function resetBoard() {
+    for (let i = 0; i < width*width; i++) {
+      
+      if (userSquares[i].classList.contains('taken')){
+        userSquares[i].classList = 'points'  
+      }
+    }
+  }
+
+  resetButton.addEventListener('click', resetBoard)
+
   //Game Logic
   function playGame() {
     if (isGameOver) return
+
+    //Server grids of users
+    let userShips = []
+    for (let i = 0; i < width*width; i++) {
+      
+      if (userSquares[i].classList.contains('taken')){
+        userShips.push(i)
+      }
+    }
+    console.log(userShips)
+
+    //............
+    
     if (currentPlayer === true) {
       turnDisplay.innerHTML = 'Player1 Go'
       playerMove(computerSquares)
