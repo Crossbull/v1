@@ -18,14 +18,13 @@ wss.getUniqueID = function () {
 }
 
 wss.on('connection', function connection(ws) {
-  ws.id = wss.getUniqueID();
-  players.push(ws.id);
+  players.push(ws);
 
   ws.on('message', function incoming(data) {
     if(grids.length < 2){
       grids.push(data);
     }
-    if(ws.id === players[0] && turns === true){
+    if(ws === players[0] && turns === true){
       //1st number = player / 2nd number = hit/miss
 
       //player1
@@ -37,7 +36,7 @@ wss.on('connection', function connection(ws) {
         console.log('00')//player1 miss
       }
       turns = false
-    }else if(ws.id === players[1] && turns === false){
+    }else if(ws === players[1] && turns === false){
       //player2
       if(grids[0].includes(data)){
         players[1].send('11');

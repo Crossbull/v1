@@ -101,14 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
     generate(shipArray[i],computerSquares)
   }
 
-  //Deactivate draggable ships
-  function shipsOff(){
-    
-  }
-
   function generateUser() {
-    shipsOff()
     resetBoard()
+    removeDragShip()
     for(var i = 0 ; i<5 ; i++){
       generate(shipArray[i],userSquares)
     }
@@ -141,6 +136,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   rotateButton.addEventListener('click', rotate)
 
+  //Remove Draggable Ships
+  function removeDragShip(){
+    ships.forEach(ship => displayGrid.removeChild(ship))
+  }
+
+  //Create Draggable Ships
+  function createDragShip(){
+    ships.forEach(ship => displayGrid.appendChild(ship))
+  }
+  
   //move around user ship
   ships.forEach(ship => ship.addEventListener('dragstart', dragStart))
   userSquares.forEach(square => square.addEventListener('dragstart', dragStart))
@@ -213,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function dragEnd() {
     console.log('dragend')
   }
+  
 
   //Singler player or multiplayer
 
@@ -235,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
   multiButton.addEventListener('click', multiPlayer)
 
   //Reset User ships
-
   function resetBoard() {
     for (let i = 0; i < width*width; i++) {
       
@@ -243,6 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userSquares[i].classList = 'points'  
       }
     }
+    createDragShip()
   }
 
   resetButton.addEventListener('click', resetBoard)
