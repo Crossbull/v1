@@ -3,45 +3,76 @@
 }
 
 .grid-user {
-  width: 400px;
-  height: 400px;
-  display: flex;
-  flex-wrap: wrap;
-  background-color: blue;
-  margin: 20px;
+  width: 22vw;
+	height: 22vw;
+	background: #008B8B;
+	border-left: 1px solid #8DEEEE;
+	border-bottom: 1px solid #8DEEEE;
 }
 
 .grid div {
-  width: 40px;
-  height: 40px;
+  width: 2vw;
+	height: 2vw;
 }
 
 .grid-computer {
-  width: 400px;
-  height: 400px;
-  display: flex;
-  flex-wrap: wrap;
-  background-color: lightgreen;
-  margin: 20px;
+  width: 22vw;
+	height: 22vw;
+	background: #008B8B;
+	border-left: 1px solid #8DEEEE;
+	border-bottom: 1px solid #8DEEEE;
 }
 
 .grid-display {
-  width: 400px;
-  height: 400px;
-  margin: 20px;
-  background-color: yellow;
+  width: 12vw;
+	height: 22vw;
+	background: #f0ec04;
+	border: 1px solid #8DEEEE;
+}
+
+.points {
+	position: relative;
+	min-width: 2.18vw;
+	min-height: 2.18vw;
+	width: 2.18vw;
+	height: 2.18vw;
+	border-top: 1px solid #8DEEEE;
+	border-right: 1px solid #8DEEEE;
+	display: inline-block;
+	align-self: center;
+}
+
+.button {
+	position: relative;
+	display: block;
+	width: 70%;
+	height: 40px;
+	margin: 50px auto;
+	border: 2px solid #cccccc;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+
+	text-align: center;
+	line-height: 40px;
+
+	cursor: pointer;
+}
+
+.button:hover {
+	background: rgba(169,169,169,0.3);
 }
 
 .destroyer-container {
-  width: 80px;
-  height: 40px;
+  width: 4vw;
+	height: 2vw;
   background-color: orange;
   margin: 10px;
   display: flex;
 }
 .destroyer-container-vertical {
-  width: 40px;
-  height: 80px;
+  width: 2vw;
+	height: 4vw;
   background-color: orange;
   margin: 10px;
   display: flex;
@@ -49,16 +80,16 @@
 }
 
 .submarine-container {
-  width: 120px;
-  height: 40px;
+  width: 6vw;
+	height: 2vw;
   background-color: pink;
   margin: 10px;
   display: flex;
 }
 
 .submarine-container-vertical {
-  width: 40px;
-  height: 120px;
+  width: 2vw;
+	height: 6vw;
   background-color: pink;
   margin: 10px;
   display: flex;
@@ -66,16 +97,16 @@
 }
 
 .cruiser-container {
-  width: 120px;
-  height: 40px;
+  width: 6vw;
+	height: 2vw;
   background-color: purple;
   margin: 10px;
   display: flex;
 }
 
 .cruiser-container-vertical {
-  width: 40px;
-  height: 120px;
+  width: 2vw;
+	height: 6vw;
   background-color: purple;
   margin: 10px;
   display: flex;
@@ -83,16 +114,16 @@
 }
 
 .battleship-container {
-  width: 160px;
-  height: 40px;
+  width: 8vw;
+	height: 2vw;
   background-color: aqua;
   margin: 10px;
   display: flex;
 }
 
 .battleship-container-vertical {
-  width: 40px;
-  height: 160px;
+  width: 2vw;
+	height: 8vw;
   background-color: aqua;
   margin: 10px;
   display: flex;
@@ -101,16 +132,16 @@
 
 
 .carrier-container {
-  width: 200px;
-  height: 40px;
+  width: 10vw;
+	height: 2vw;
   background-color: green;
   margin: 10px;
   display: flex;
 }
 
 .carrier-container-vertical {
-  width: 40px;
-  height: 200px;
+  width: 2vw;
+	height: 10vw;
   background-color: green;
   margin: 10px;
   display: flex;
@@ -119,8 +150,8 @@
 
 
 .ship div {
-  width: 40px;
-  height: 40px;
+  width: 2vw;
+	height: 2vw;
 }
 
 .destroyer {

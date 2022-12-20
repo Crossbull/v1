@@ -22,11 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPlayer = true
   const width = 10
 
+  let ws;
+
+  let userShips = []
+
   //Create Board
   function createBoard(grid, squares) {
     for (let i = 0; i < width*width; i++) {
       const square = document.createElement('div')
       square.dataset.id = i
+      square.classList.add('points')
       grid.appendChild(square)
       squares.push(square)
     }
@@ -96,7 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
     generate(shipArray[i],computerSquares)
   }
 
+  //Deactivate draggable ships
+  function shipsOff(){
+    
+  }
+
   function generateUser() {
+    shipsOff()
+    resetBoard()
     for(var i = 0 ; i<5 ; i++){
       generate(shipArray[i],userSquares)
     }
@@ -204,30 +216,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //Singler player or multiplayer
 
-  multi = 'computer'
-
   function multiPlayer() {
-    multi = 'user2'
+    serverGrid()
+    //Open Connection
+    ws = new WebSocket('ws://localhost:6969')
+    ws.onopen = () => {
+      console.log('Connection opened!')
+        //Send player grid to server
+        ws.send(userShips)
+    }
+
+     //Close Connection
+    ws.onclose = function() {
+      ws = null
+    }
   }
 
   multiButton.addEventListener('click', multiPlayer)
 
+  //Reset User ships
+
+  function resetBoard() {
+    for (let i = 0; i < width*width; i++) {
+      
+      if (userSquares[i].classList.contains('taken')){
+        userSquares[i].classList = 'points'  
+      }
+    }
+  }
+
+  resetButton.addEventListener('click', resetBoard)
+
+  //Deactivate buttons
+  function btnOff(){
+    resetButton.removeEventListener('click', resetBoard)
+    startButton.removeEventListener('click', playGame)
+    multiButton.removeEventListener('click', multiPlayer)
+    randomButton.removeEventListener('click', generateUser)
+    rotateButton.removeEventListener('click', rotate)
+  }
+
+  //Server grids of users
+  function serverGrid(){
+    for (let i = 0; i < width*width; i++) {
+      
+      if (userSquares[i].classList.contains('taken')){
+        userShips.push(i)
+      }
+    }
+    console.log(userShips)
+  }
+
   //Game Logic
   function playGame() {
     if (isGameOver) return
+    btnOff()
     if (currentPlayer === true) {
       turnDisplay.innerHTML = 'Player1 Go'
       playerMove(computerSquares)
     }else if (currentPlayer === false) {
-      if (multi === 'computer') {
-        turnDisplay.innerHTML = 'Computers Go'
-        setTimeout(computerGo, 1000)
-      }else if (multi === 'user2') {
-        turnDisplay.innerHTML = 'Player2 Go'
-        playerMove(userSquares)
-      }
+      turnDisplay.innerHTML = 'Computers Go'
+      setTimeout(computerGo, 1000)
     }
   }
+  
 
   startButton.addEventListener('click', playGame)
 
@@ -252,6 +304,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let cpuCarrierCount = 0
 
   function revealSquare(square) {
+    if(square.classList.contains('boom') || square.classList.contains('miss')){
+      return
+    }
     if (!square.classList.contains('boom')) {
       if (square.classList.contains('destroyer')) if(currentPlayer === true) {destroyerCount++}else{cpuDestroyerCount++}
       if (square.classList.contains('submarine')) if(currentPlayer === true) {submarineCount++}else{cpuSubmarineCount++}
