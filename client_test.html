@@ -1,0 +1,4 @@
+<button type="button" id="turn" name="button">Next Turn</button>
+ $("#turn").on("click",function(e){
+     socket.emit('pass_turn');
+ })

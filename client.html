@@ -9,6 +9,8 @@
 
     let ws;
 
+    const userShips = []
+
     function init() {
       if (ws) {
         ws.onerror = ws.onopen = ws.onclose = null;
